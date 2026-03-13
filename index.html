@@ -152,6 +152,13 @@
     }
 
     function calculate() {
+        // --- BHOLA'S SECRET EASTER EGG ---
+        // Bhai apna original word "Bhola OP 🔥" ki jagah yahan daal lena 👇
+        if (display.value === '69+69') {
+            display.value= BholaKichooMaiBG ka Muh kaala🔥';
+            return; // Yahin se wapas bhej dega, normal calculate nahi karega
+        }
+
         try {
             // Evaluates the math inside the input box
             let result = eval(display.value);
