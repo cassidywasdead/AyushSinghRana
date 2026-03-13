@@ -144,6 +144,10 @@
     const display = document.getElementById('display');
 
     function appendValue(val) {
+        // BUG FIX: Agar screen pe easter egg ya error hai, toh naya number dabane pe usko pehle saaf kar dega
+        if (display.value === 'Bhola OP 🔥' || display.value === 'Bhola Error!') {
+            display.value = '';
+        }
         display.value += val;
     }
 
@@ -152,17 +156,18 @@
     }
 
     function calculate() {
+        // Agar galti se khali space pe equal daba diya toh kuch mat kar
+        if (display.value.trim() === '') return;
+
         // --- BHOLA'S SECRET EASTER EGG ---
-        // Bhai apna original word "Bhola OP 🔥" ki jagah yahan daal lena 👇
         if (display.value === '69+69') {
-            display.value = 'BhoduKiChootMaiBGKaMuhKaala' 🔥';
-            return; // Yahin se wapas bhej dega, normal calculate nahi karega
+            display.value = 'bhoduKiChootMaiBGKaMuhKaala🔥'; 
+            return; 
         }
 
         try {
-            // Evaluates the math inside the input box
+            // Evaluates the math
             let result = eval(display.value);
-            // Handling undefined or weird calculations gracefully
             if(result === undefined) {
                 display.value = '';
             } else {
@@ -170,7 +175,7 @@
             }
         } catch (error) {
             display.value = 'Bhola Error!';
-            setTimeout(() => { clearDisplay(); }, 1500); // Clears error after 1.5s
+            setTimeout(() => { clearDisplay(); }, 1500); // 1.5s baad screen saaf ho jayegi
         }
     }
 </script>
