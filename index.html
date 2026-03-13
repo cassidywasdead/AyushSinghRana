@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bholaram's Calculator</title>
+    <style>
+        /* Ekdum colorful background */
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Calculator ka main dabbi */
+        .bhola-container {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            text-align: center;
+            width: 320px;
+            border: 3px solid #fff;
+        }
+
+        h2 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        /* Number display screen */
+        #display {
+            width: 88%;
+            height: 50px;
+            background-color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 28px;
+            text-align: right;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 4px 8px rgba(0,0,0,0.2);
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Button grid setup */
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.92);
+        }
+
+        /* Bholaram ke mast button colors */
+        .num { background-color: #ffecd2; color: #d97858; }
+        .num:hover { background-color: #fcb69f; color: #fff; }
+        
+        .op { background-color: #84fab0; color: #2a8b54; font-size: 26px;}
+        .op:hover { background-color: #8fd3f4; color: #fff; }
+        
+        .clear { background-color: #ff0844; color: white; grid-column: span 2; font-size: 18px;}
+        .clear:hover { background-color: #ff4d79; }
+
+        .equal { background-color: #f6d365; color: #d35400; grid-column: span 2; font-size: 18px;}
+        .equal:hover { background-color: #fda085; color: #fff; }
+
+        /* Tumhari special line */
+        .footer-text {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: 900;
+            color: #ff0844;
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: blinker 2s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0.7; transform: scale(0.98); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bhola-container">
+    <h2>Bholaram Ka Bawaal 🧮</h2>
+    
+    <input type="text" id="display" disabled>
+    
+    <div class="keys">
+        <button class="clear" onclick="clearDisplay()">Bhola Clear</button>
+        <button class="equal" onclick="calculate()">Bhola Solve</button>
+        
+        <button class="num" onclick="appendValue('7')">7</button>
+        <button class="num" onclick="appendValue('8')">8</button>
+        <button class="num" onclick="appendValue('9')">9</button>
+        <button class="op" onclick="appendValue('/')">÷</button>
+        
+        <button class="num" onclick="appendValue('4')">4</button>
+        <button class="num" onclick="appendValue('5')">5</button>
+        <button class="num" onclick="appendValue('6')">6</button>
+        <button class="op" onclick="appendValue('*')">×</button>
+        
+        <button class="num" onclick="appendValue('1')">1</button>
+        <button class="num" onclick="appendValue('2')">2</button>
+        <button class="num" onclick="appendValue('3')">3</button>
+        <button class="op" onclick="appendValue('-')">-</button>
+        
+        <button class="num" onclick="appendValue('.')">.</button>
+        <button class="num" onclick="appendValue('0')">0</button>
+        <button class="op" style="grid-column: span 2;" onclick="appendValue('+')">+</button>
+    </div>
+
+    <div class="footer-text">adjust bhola's 30cm</div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+
+    function appendValue(val) {
+        display.value += val;
+    }
+
+    function clearDisplay() {
+        display.value = '';
+    }
+
+    function calculate() {
+        try {
+            // Evaluates the math inside the input box
+            let result = eval(display.value);
+            // Handling undefined or weird calculations gracefully
+            if(result === undefined) {
+                display.value = '';
+            } else {
+                display.value = result;
+            }
+        } catch (error) {
+            display.value = 'Bhola Error!';
+            setTimeout(() => { clearDisplay(); }, 1500); // Clears error after 1.5s
+        }
+    }
+</script>
+
+</body>
+</html>
